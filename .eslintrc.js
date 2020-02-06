@@ -36,5 +36,8 @@ module.exports = {
 		'react/state-in-constructor': 0,
 		'react/destructuring-assignment': 0,
 		'react/no-access-state-in-setstate': 0,
+		'@typescript-eslint/semi': 0,
+		'@typescript-eslint/member-delimiter-style': 0,
+		'react/prop-types': 0,
 	},
 }
