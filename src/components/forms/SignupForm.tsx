@@ -1,9 +1,14 @@
 import React, { useState, FormEvent } from 'react'
 import InlineMessage from '../messages/InlineMessage'
+import { AxiosPromise } from 'axios'
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>
 
-const SignupForm: React.FC = () => {
+type SignupProps = {
+	submit: (data: UserInfo) => Promise<void | AxiosPromise>
+}
+
+const SignupForm: React.FC<SignupProps> = ({ submit }) => {
 	const [data, setData] = useState<UserInfo>({
 		username: '',
 		password: '',
@@ -32,11 +37,16 @@ const SignupForm: React.FC = () => {
 		e.preventDefault()
 		const errors = validate(data)
 		setErrors(errors)
-		// TODO API
+		if (Object.keys(errors).length === 0) {
+			setErrors({})
+			submit(data).catch(res =>
+				setErrors({ ...res.response.data.errors })
+			)
+		}
 	}
 
 	return (
-		<div className='col-4 mt-5 border rounded-lg bg-white'>
+		<div className='col-4 border rounded-lg bg-white mx-auto my-5'>
 			<form className='my-2 py-2' onSubmit={onSubmit}>
 				<div className='form-group'>
 					<label htmlFor='username'>
