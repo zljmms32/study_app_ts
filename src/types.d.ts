@@ -9,4 +9,6 @@ type Errors = {
 	password?: string
 	passwordConfirm?: string
 	global?: string
+	studentName?: string
+	grade?: string
 }

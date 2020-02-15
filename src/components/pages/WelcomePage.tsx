@@ -4,7 +4,8 @@ import SignupForm from '../forms/SignupForm'
 import { user } from '../../api'
 import { AxiosPromise } from 'axios'
 import { History } from 'history'
-import { Switch, Route, Link, useRouteMatch, Redirect } from 'react-router-dom'
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom'
+import Nav from '../navs/Nav'
 
 type Welcome = {
 	history: History
@@ -14,27 +15,14 @@ const WelcomePage: React.FC<Welcome> = ({ history }) => {
 	const { path, url } = useRouteMatch()
 
 	const signInSubmit = (data: UserInfo): Promise<void | AxiosPromise> =>
-		user.signin(data).then(() => history.push('/dashboard'))
+		user.signin(data).then(() => history.push('/students'))
 
 	const signUpSubmit = (data: UserInfo): Promise<void | AxiosPromise> =>
-		user.signup(data).then(() => history.push('/dashboard'))
+		user.signup(data).then(() => history.push('/students'))
 
 	return (
 		<div className='container vh-100 d-flex flex-column align-items-center'>
-			<div className='container d-flex align-items-center'>
-				<h1 className='text-lg mb-0 flex-grow-1'>
-					Welcome to Study App
-				</h1>
-				<Link className='btn btn-primary btn-sm' to={`${url}/signin`}>
-					Sign In
-				</Link>
-				<Link
-					className='btn btn-primary btn-sm ml-2'
-					to={`${url}/signup`}
-				>
-					Sign Up
-				</Link>
-			</div>
+			<Nav url={url} />
 			<div className='container flex-grow-1'>
 				<Switch>
 					<Route
