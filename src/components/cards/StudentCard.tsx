@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const StudentCard: React.FC = () => {
+type StudentCardProps = {
+	student: StudentInfo
+	key: number
+}
+
+const StudentCard: React.FC<StudentCardProps> = () => {
 	return (
 		<div className='card'>
 			<img

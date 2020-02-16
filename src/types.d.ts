@@ -11,4 +11,11 @@ type Errors = {
 	global?: string
 	studentName?: string
 	grade?: string
+	age?: string
+}
+
+type StudentInfo = {
+	studentName: string
+	grade: string
+	age: string
 }

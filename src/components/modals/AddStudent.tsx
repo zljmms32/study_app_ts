@@ -1,22 +1,24 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Modal } from 'react-bootstrap'
 import InlineMessage from '../messages/InlineMessage'
-
-type StudentInfo = {
-	studentName: string
-	grade: string
-}
+import { student } from '../../api'
 
 type AddStudentProps = {
 	show: boolean
 	onHide: () => void
+	submit: (student: StudentInfo) => void
 }
 
 const AddStudent: React.FC<AddStudentProps> = props => {
-	const [data, setData] = useState<StudentInfo>({
+	const { submit, ...rest } = props
+
+	const initData = {
 		studentName: '',
 		grade: '',
-	})
+		age: '',
+	}
+
+	const [data, setData] = useState<StudentInfo>(initData)
 
 	const [errors, setErrors] = useState<Errors>({})
 
@@ -28,20 +30,27 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 		})
 	}
 
+	const onSubmit = (e: FormEvent): void => {
+		e.preventDefault()
+		student.add(data).then(student => {
+			submit(student)
+			props.onHide()
+		})
+	}
+
+	const hideModal = (e: FormEvent): void => {
+		e.preventDefault()
+		props.onHide()
+		setData(initData)
+	}
+
 	return (
-		<Modal
-			{...props}
-			centered
-			size='lg'
-			aria-labelledby='contained-modal-title-vcenter'
-		>
+		<Modal {...rest} size='lg'>
 			<Modal.Header closeButton>
-				<Modal.Title id='contained-modal-title-vcenter'>
-					Add Student
-				</Modal.Title>
+				<Modal.Title>Add Student</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>
-				<form className='my-2 py-2'>
+			<form className='my-2 py-2' onSubmit={onSubmit}>
+				<Modal.Body>
 					<div className='form-group'>
 						<label htmlFor='studentName'>
 							<strong>Student Name</strong>
@@ -57,6 +66,25 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 						{errors.studentName && (
 							<InlineMessage
 								text={errors.studentName}
+								messageType={'danger'}
+							/>
+						)}
+					</div>
+					<div className='form-group'>
+						<label htmlFor='age'>
+							<strong>Student Age</strong>
+						</label>
+						<input
+							type='text'
+							className='form-control'
+							id='age'
+							name='age'
+							value={data.age}
+							onChange={onChange}
+						/>
+						{errors.age && (
+							<InlineMessage
+								text={errors.age}
 								messageType={'danger'}
 							/>
 						)}
@@ -80,20 +108,19 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 							/>
 						)}
 					</div>
-				</form>
-			</Modal.Body>
-			<Modal.Footer>
-				<button
-					type='submit'
-					className='btn btn-outline-primary btn-sm'
-					onClick={props.onHide}
-				>
-					Cancel
-				</button>
-				<button type='submit' className='btn btn-primary btn-sm'>
-					Save
-				</button>
-			</Modal.Footer>
+				</Modal.Body>
+				<Modal.Footer>
+					<button
+						className='btn btn-outline-primary btn-sm'
+						onClick={hideModal}
+					>
+						Cancel
+					</button>
+					<button type='submit' className='btn btn-primary btn-sm'>
+						Save
+					</button>
+				</Modal.Footer>
+			</form>
 		</Modal>
 	)
 }
