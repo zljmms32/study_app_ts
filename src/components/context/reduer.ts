@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { USER_SIGN_IN, AnyAciton, USER_SIGN_OUT } from './action'
 
-export const user = (state: any = {}, action: AnyAciton): any => {
+export const userReducer = (state: any = {}, action: AnyAciton): any => {
 	switch (action.type) {
 		case USER_SIGN_IN:
-			return action.data
+			return { ...state, user: action.payload }
 		case USER_SIGN_OUT:
-			return {}
+			delete state.user
+			return { ...state }
 		default:
 			return state
 	}

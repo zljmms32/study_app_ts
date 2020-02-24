@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 type StudentCardProps = {
 	student: StudentInfo
-	key: number
 }
 
-const StudentCard: React.FC<StudentCardProps> = () => {
+const StudentCard: React.FC<StudentCardProps> = ({ student }) => {
+	const { studentName, grade, age, _id } = student
 	return (
 		<div className='card'>
 			<img
@@ -15,10 +15,11 @@ const StudentCard: React.FC<StudentCardProps> = () => {
 				alt='...'
 			/>
 			<div className='card-body'>
-				<h5 className='card-title'>Card title</h5>
-				<p className='card-text'>Some quick example text</p>
-				<Link to={'/dashboard/aaaaa'} className='btn btn-primary'>
-					Go somewhere
+				<h5 className='card-title'>{studentName}</h5>
+				<p className='card-text'>Age: {age}</p>
+				<p className='card-text'>Grade: {grade}</p>
+				<Link to={`/dashboard/${_id}`} className='btn btn-primary'>
+					Go to dashboard
 				</Link>
 			</div>
 		</div>

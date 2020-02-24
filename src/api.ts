@@ -1,10 +1,10 @@
-import axios, { AxiosPromise } from 'axios'
+import axios from 'axios'
 
 export const user = {
-	signin: (user: UserInfo): AxiosPromise =>
-		axios.post('/users/signin', { user }),
-	signup: (user: UserInfo): AxiosPromise =>
-		axios.post('/users/signup', { user }),
+	signin: (user: UserInfo): Promise<string> =>
+		axios.post('/users/signin', { user }).then(res => res.data.user),
+	signup: (user: UserInfo): Promise<string> =>
+		axios.post('/users/signup', { user }).then(res => res.data.user),
 }
 
 export const student = {

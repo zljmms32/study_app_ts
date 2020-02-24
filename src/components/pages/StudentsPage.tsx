@@ -42,8 +42,8 @@ const StudentsPage: React.FC = () => {
 				{students.length === 0 ? (
 					<HeaderMessage text={'Please add students!'} />
 				) : (
-					students.map((student, index) => (
-						<StudentCard student={student} key={index} />
+					students.map(student => (
+						<StudentCard student={student} key={student._id} />
 					))
 				)}
 				<AddStudent

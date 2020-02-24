@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SigninForm from '../forms/SigninForm'
 import SignupForm from '../forms/SignupForm'
-import { user } from '../../api'
 import { AxiosPromise } from 'axios'
 import { History } from 'history'
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom'
 import Nav from '../navs/Nav'
+import { Context } from '../context/Context'
 
 type Welcome = {
 	history: History
 }
 
 const WelcomePage: React.FC<Welcome> = ({ history }) => {
+	const { signin, signup } = useContext(Context)
 	const { path, url } = useRouteMatch()
 
 	const signInSubmit = (data: UserInfo): Promise<void | AxiosPromise> =>
-		user.signin(data).then(() => history.push('/students'))
+		signin(data).then(() => history.push('/students'))
 
 	const signUpSubmit = (data: UserInfo): Promise<void | AxiosPromise> =>
-		user.signup(data).then(() => history.push('/students'))
+		signup(data).then(() => history.push('/students'))
 
 	return (
 		<div className='container vh-100 d-flex flex-column align-items-center'>

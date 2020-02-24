@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import DashboardPage from './components/pages/DashboardPage'
 import WelcomePage from './components/pages/WelcomePage'
 import StudentsPage from './components/pages/StudentsPage'
+import UserRoute from './components/routes/UserRoute'
 
 const App: React.FC = () => {
 	return (
@@ -18,7 +19,7 @@ const App: React.FC = () => {
 				path='/dashboard/:studentId'
 				component={DashboardPage}
 			/>
-			<Route exact path='/students' component={StudentsPage} />
+			<UserRoute exact path='/students' component={StudentsPage} />
 		</Router>
 	)
 }

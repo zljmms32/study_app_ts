@@ -1,6 +1,6 @@
 type UserInfo = {
 	username: string
-	password: string
+	password?: string
 	passwordConfirm?: string
 }
 
@@ -18,4 +18,5 @@ type StudentInfo = {
 	studentName: string
 	grade: string
 	age: string
+	_id?: string
 }
