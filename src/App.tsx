@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import DashboardPage from './components/pages/DashboardPage'
-import WelcomePage from './components/pages/WelcomePage'
-import StudentsPage from './components/pages/StudentsPage'
+import DashboardPage from './components/dashboard/DashboardPage'
+import WelcomePage from './components/welcome/WelcomePage'
+import StudentsPage from './components/student/StudentsPage'
 import UserRoute from './components/routes/UserRoute'
 
 const App: React.FC = () => {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Nav from '../navs/Nav'
-import StudentCard from '../cards/StudentCard'
-import Dashboard from '../pages/DashboardPage'
-import AddStudent from '../modals/AddStudent'
+import Nav from '../Nav'
+import StudentCard from './StudentCard'
+import Dashboard from '../dashboard/DashboardPage'
+import AddStudent from './AddStudent'
 import { student } from '../../api'
 import HeaderMessage from '../messages/HeaderMessage'
 
@@ -22,7 +22,6 @@ const StudentsPage: React.FC = () => {
 			setStudents(students)
 		}
 		allStudents()
-		// student.all().then(students => setStudents(students))
 	}, [])
 
 	return (

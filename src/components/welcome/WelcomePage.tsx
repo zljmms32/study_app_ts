@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import SigninForm from '../forms/SigninForm'
-import SignupForm from '../forms/SignupForm'
+import SigninForm from './SigninForm'
+import SignupForm from './SignupForm'
 import { AxiosPromise } from 'axios'
 import { History } from 'history'
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom'
-import Nav from '../navs/Nav'
+import Nav from '../Nav'
 import { Context } from '../context/Context'
 
 type Welcome = {
