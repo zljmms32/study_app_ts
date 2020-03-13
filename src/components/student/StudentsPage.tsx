@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Nav from '../Nav'
 import StudentCard from './StudentCard'
 import Dashboard from '../dashboard/DashboardPage'
 import AddStudent from './AddStudent'
-import { student } from '../../api'
 import HeaderMessage from '../messages/HeaderMessage'
+import { Context } from '../context/Context'
+import { AxiosPromise } from 'axios'
 
 const StudentsPage: React.FC = () => {
 	const [modalShow, setModalShow] = useState<boolean>(false)
 
-	const [students, setStudents] = useState<StudentInfo[]>([])
+	const { students, addStudent, getStudents } = useContext(Context)
+
+	React.useLayoutEffect(() => {
+		getStudents()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const handleClick = (): void => {
 		setModalShow(true)
 	}
 
-	useEffect(() => {
-		async function allStudents(): Promise<void> {
-			const students = await student.all()
-			setStudents(students)
-		}
-		allStudents()
-	}, [])
+	const handleSubmit = (student: StudentInfo): Promise<void | AxiosPromise> =>
+		addStudent(student)
 
 	return (
 		<div className='container min-vh-100 d-flex flex-column align-items-center'>
@@ -48,9 +49,7 @@ const StudentsPage: React.FC = () => {
 				<AddStudent
 					show={modalShow}
 					onHide={(): void => setModalShow(false)}
-					submit={(student: StudentInfo): void =>
-						setStudents([...students, student])
-					}
+					submit={handleSubmit}
 				/>
 			</div>
 

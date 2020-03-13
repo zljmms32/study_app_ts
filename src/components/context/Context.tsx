@@ -1,8 +1,15 @@
 import React, { useReducer } from 'react'
 import { userReducer } from './reduer'
 import decode from 'jwt-decode'
-import { userSignIn, userSignOut, userSignUp, AnyAciton } from './action'
-import { user } from '../../api'
+import {
+	userSignIn,
+	userSignOut,
+	userSignUp,
+	AnyAction,
+	studentsAll,
+	studentsAdd,
+} from './action'
+import { user, student } from '../../api'
 import { AxiosPromise } from 'axios'
 
 type AppContextProps = {
@@ -15,15 +22,19 @@ type DecodedTokenType = {
 }
 
 type StateType = {
-	user: UserInfo
+	user?: UserInfo
+	students?: StudentInfo[]
 }
 
 type ContextType = {
-	state: StateType
+	user: UserInfo
+	students: StudentInfo[]
 	signin: (data: UserInfo) => Promise<void | AxiosPromise>
 	signup: (data: UserInfo) => Promise<void | AxiosPromise>
 	signout: () => void
-	dispatch: React.Dispatch<AnyAciton>
+	addStudent: (student: StudentInfo) => Promise<void | AxiosPromise>
+	getStudents: () => Promise<void>
+	dispatch: React.Dispatch<AnyAction>
 }
 
 const userInToken = (token: string): UserInfo => {
@@ -33,16 +44,22 @@ const userInToken = (token: string): UserInfo => {
 	}
 }
 
-const initState: StateType | {} = localStorage.user
-	? {
-			user: userInToken(localStorage.user),
-	  }
-	: {}
+const init = (initialState: StateType): StateType => {
+	const user = localStorage.user ? userInToken(localStorage.user) : {}
+	initialState.user = user
+	initialState.students = []
+	return initialState
+}
 
 export const Context = React.createContext({} as ContextType)
 
 const AppContext: React.FC<AppContextProps> = props => {
-	const [state, dispatch] = useReducer(userReducer, initState)
+	const [state, dispatch] = useReducer(userReducer, {}, init)
+
+	const getStudents = async (): Promise<void> => {
+		const students = await student.all()
+		dispatch(studentsAll(students))
+	}
 
 	const signin = (data: UserInfo): Promise<void | AxiosPromise> =>
 		user.signin(data).then(user => {
@@ -63,8 +80,22 @@ const AppContext: React.FC<AppContextProps> = props => {
 			dispatch(userSignUp(u))
 		})
 
+	const addStudent = (data: StudentInfo): Promise<void | AxiosPromise> =>
+		student.add(data).then(student => dispatch(studentsAdd(student)))
+
 	return (
-		<Context.Provider value={{ state, signin, signout, signup, dispatch }}>
+		<Context.Provider
+			value={{
+				user: state.user,
+				students: state.students,
+				signin,
+				signout,
+				signup,
+				addStudent,
+				getStudents,
+				dispatch,
+			}}
+		>
 			{props.children}
 		</Context.Provider>
 	)

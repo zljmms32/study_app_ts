@@ -15,13 +15,13 @@ const UserRoute: React.FC<UserRouteProps> = ({
 	component: Component,
 	...rest
 }) => {
-	const { state } = useContext(Context)
+	const { user } = useContext(Context)
 
 	return (
 		<Route
 			{...rest}
 			render={(props): React.ReactElement =>
-				!!state.user ? (
+				Object.keys(user).length > 0 ? (
 					<Component {...props} />
 				) : (
 					<Redirect to='/index' />

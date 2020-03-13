@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Modal } from 'react-bootstrap'
 import InlineMessage from '../messages/InlineMessage'
-import { student } from '../../api'
+import { AxiosPromise } from 'axios'
 
 type AddStudentProps = {
 	show: boolean
 	onHide: () => void
-	submit: (student: StudentInfo) => void
+	submit: (student: StudentInfo) => Promise<void | AxiosPromise>
 }
 
 const AddStudent: React.FC<AddStudentProps> = props => {
@@ -32,9 +32,9 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 
 	const onSubmit = (e: FormEvent): void => {
 		e.preventDefault()
-		student.add(data).then(student => {
-			submit(student)
+		submit(data).then(() => {
 			props.onHide()
+			setData(initData)
 		})
 	}
 

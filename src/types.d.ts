@@ -1,5 +1,5 @@
 type UserInfo = {
-	username: string
+	username?: string
 	password?: string
 	passwordConfirm?: string
 }
@@ -19,4 +19,9 @@ type StudentInfo = {
 	grade: string
 	age: string
 	_id?: string
+}
+
+type StateType = {
+	user?: UserInfo
+	students?: StudentInfo[]
 }

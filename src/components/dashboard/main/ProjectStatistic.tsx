@@ -1,7 +1,11 @@
 import React from 'react'
+import BoardTemplate from './BoardTemplate'
+import ProjectCard from './ProjectCard'
 
 const ProjectStatistic: React.FC = () => {
-	return <div>ProjectStatistic</div>
+	return (
+		<BoardTemplate boardName='Project Statistic' component={ProjectCard} />
+	)
 }
 
 export default ProjectStatistic

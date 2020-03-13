@@ -1,10 +1,10 @@
 import React from 'react'
-import Calendar from './Calendar'
+import Calendar from '../../calendar'
 import TodaySchedule from './TodaySchedule'
 
 const DashboardSidebar: React.FC = () => {
 	return (
-		<div className='container w-25'>
+		<div className='col-4'>
 			<Calendar />
 			<TodaySchedule />
 		</div>

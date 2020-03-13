@@ -30,7 +30,7 @@ const SigninForm: React.FC<SigninProps> = ({ submit }) => {
 		} as UserInfo)
 	}
 
-	const onSubmit = (e: FormEvent): void => {
+	const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault()
 		const errors = validate(data)
 		setErrors(errors)

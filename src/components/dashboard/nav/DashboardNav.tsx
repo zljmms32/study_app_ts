@@ -5,14 +5,14 @@ import CurrentStudentCard from './CurrentStudentCard'
 
 const DashboardNav: React.FC = () => {
 	return (
-		<nav
-			className='container d-flex align-items-center justify-content-between'
+		<div
+			className='d-flex align-items-center justify-content-between'
 			style={{ height: '10%' }}
 		>
 			<Logo />
 			<BoardMenuList />
 			<CurrentStudentCard />
-		</nav>
+		</div>
 	)
 }
 

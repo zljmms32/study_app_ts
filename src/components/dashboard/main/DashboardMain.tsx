@@ -6,11 +6,15 @@ import ExamSchedule from './ExamSchedule'
 
 const DashboardMain: React.FC = () => {
 	return (
-		<div className='container w-75'>
-			<ProjectStatistic />
-			<Inbox />
-			<Task />
-			<ExamSchedule />
+		<div className='col-9'>
+			<div className='row'>
+				<ProjectStatistic />
+				<Inbox />
+			</div>
+			<div className='row'>
+				<Task />
+				<ExamSchedule />
+			</div>
 		</div>
 	)
 }

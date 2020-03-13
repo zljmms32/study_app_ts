@@ -5,10 +5,10 @@ import DashboardSidebar from './sidebar/DashboardSidebar'
 
 const DashboardPage: React.FC = () => {
 	return (
-		<div className='container mx-auto px-0 vw-100 vh-100 d-flex flex-column align-items-center'>
+		<div className='mx-auto px-0 vw-100 vh-100 d-flex flex-column align-items-center'>
 			<DashboardNav />
 			<hr />
-			<div className='container d-flex' style={{ height: '90%' }}>
+			<div className='d-flex' style={{ height: '90%' }}>
 				<DashboardMain />
 
 				<DashboardSidebar />
