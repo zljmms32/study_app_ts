@@ -1,5 +1,5 @@
 import React from 'react'
-import ProgressRing from '../../ProgressRing'
+import ProgressRing from '../../../ProgressRing'
 
 const ProjectCard: React.FC = () => {
 	return (

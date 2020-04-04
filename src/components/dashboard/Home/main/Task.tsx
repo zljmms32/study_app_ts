@@ -1,5 +1,5 @@
 import React from 'react'
-import BoardTemplate from './BoardTemplate'
+import BoardTemplate from '../../BoardTemplate'
 import TaskCard from './TaskCard'
 
 const Task: React.FC = () => {

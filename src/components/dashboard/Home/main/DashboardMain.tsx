@@ -6,7 +6,7 @@ import ExamSchedule from './ExamSchedule'
 
 const DashboardMain: React.FC = () => {
 	return (
-		<div className='col-9'>
+		<div className='col-lg-9 col-md-12'>
 			<div className='row'>
 				<ProjectStatistic />
 				<Inbox />

@@ -2,7 +2,6 @@ import React, { useState, FormEvent, ChangeEvent } from 'react'
 import InlineMessage from '../messages/InlineMessage'
 import { Link } from 'react-router-dom'
 import { AxiosPromise } from 'axios'
-import HeaderMessage from '../messages/HeaderMessage'
 
 type SigninProps = {
 	submit: (data: UserInfo) => Promise<void | AxiosPromise>
@@ -44,8 +43,13 @@ const SigninForm: React.FC<SigninProps> = ({ submit }) => {
 
 	return (
 		<div className='col-4 border rounded-lg bg-white mx-auto my-5'>
-			{errors.global && <HeaderMessage text={errors.global} />}
 			<form className='my-2 py-2' onSubmit={onSubmit}>
+				{errors.global && (
+					<InlineMessage
+						text={errors.global}
+						messageType={'danger'}
+					/>
+				)}
 				<div className='form-group'>
 					<label htmlFor='username'>
 						<strong>Username</strong>

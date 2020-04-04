@@ -18,7 +18,7 @@ const StudentCard: React.FC<StudentCardProps> = ({ student }) => {
 				<h5 className='card-title'>{studentName}</h5>
 				<p className='card-text'>Age: {age}</p>
 				<p className='card-text'>Grade: {grade}</p>
-				<Link to={`/dashboard/${_id}`} className='btn btn-primary'>
+				<Link to={`/dashboard/${_id}/home`} className='btn btn-primary'>
 					Go to dashboard
 				</Link>
 			</div>

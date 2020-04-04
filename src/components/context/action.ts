@@ -4,6 +4,8 @@ export const USER_SIGN_OUT = 'USER_SIGN_OUT'
 export const USER_SIGN_UP = 'USER_SIGN_UP'
 export const STUDENT_ALL = 'STUDENT_ALL'
 export const STUDENT_ADD = 'STUDENT_ADD'
+export const TASK_ALL = 'TASK_ALL'
+export const TASK_ADD = 'TASK_ADD'
 
 export interface Action<T = any> {
 	type: T
@@ -36,4 +38,14 @@ export const studentsAll = (students: StudentInfo[]): AnyAction => ({
 export const studentsAdd = (student: StudentInfo): AnyAction => ({
 	type: STUDENT_ADD,
 	payload: student,
+})
+
+export const tasksAll = (tasks: TaskInfo[]): AnyAction => ({
+	type: TASK_ALL,
+	payload: tasks,
+})
+
+export const tasksAdd = (task: TaskInfo): AnyAction => ({
+	type: TASK_ADD,
+	payload: task,
 })

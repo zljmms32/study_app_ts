@@ -1,5 +1,5 @@
 import React from 'react'
-import BoardTemplate from './BoardTemplate'
+import BoardTemplate from '../../BoardTemplate'
 import ProjectCard from './ProjectCard'
 
 const ProjectStatistic: React.FC = () => {

@@ -5,12 +5,15 @@ import {
 	USER_SIGN_OUT,
 	STUDENT_ALL,
 	STUDENT_ADD,
+	TASK_ALL,
+	TASK_ADD,
 } from './action'
 
 export const userReducer = (
 	state: StateType = {
 		user: {},
 		students: [],
+		tasks: [],
 	},
 	action: AnyAction
 ): any => {
@@ -24,6 +27,13 @@ export const userReducer = (
 		case STUDENT_ADD:
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			return { ...state, students: [...state.students!, action.payload] }
+		case TASK_ALL:
+			return { ...state, tasks: action.payload }
+		case TASK_ADD:
+			return {
+				...state,
+				tasks: [...(state.tasks as TaskInfo[]), action.payload],
+			}
 		default:
 			return state
 	}

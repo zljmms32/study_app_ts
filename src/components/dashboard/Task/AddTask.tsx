@@ -1,27 +1,29 @@
-import React, { useState, useContext, ChangeEvent, FormEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { Modal } from 'react-bootstrap'
-import InlineMessage from '../messages/InlineMessage'
+import InlineMessage from '../../messages/InlineMessage'
 import { AxiosPromise } from 'axios'
-import { Context } from '../context/Context'
+// import { Context } from '../../context/Context'
 
-type AddStudentProps = {
+type AddTaskProps = {
 	show: boolean
 	onHide: () => void
-	submit: (student: StudentInfo) => Promise<void | AxiosPromise>
+	studentId: string
+	submit: (task: TaskInfo) => Promise<void | AxiosPromise>
 }
 
-const AddStudent: React.FC<AddStudentProps> = props => {
-	const { user } = useContext(Context)
-	const { submit, ...rest } = props
+const AddTask: React.FC<AddTaskProps> = props => {
+	// const {} = useContext(Context)
+	const { submit, studentId, ...rest } = props
 
 	const initData = {
-		userId: user.userId as string,
-		studentName: '',
-		grade: '',
-		age: '',
+		studentId: studentId,
+		title: '',
+		subject: '',
+		content: '',
+		deadline: '',
 	}
 
-	const [data, setData] = useState<StudentInfo>(initData)
+	const [data, setData] = useState<TaskInfo>(initData)
 
 	const [errors, setErrors] = useState<Errors>({})
 
@@ -50,63 +52,82 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 	return (
 		<Modal {...rest} size='lg'>
 			<Modal.Header closeButton>
-				<Modal.Title>Add Student</Modal.Title>
+				<Modal.Title>Add Task</Modal.Title>
 			</Modal.Header>
 			<form className='my-2 py-2' onSubmit={onSubmit}>
 				<Modal.Body>
 					<div className='form-group'>
-						<label htmlFor='studentName'>
-							<strong>Student Name</strong>
+						<label htmlFor='title'>
+							<strong>Title</strong>
 						</label>
 						<input
 							type='text'
 							className='form-control'
-							id='studentName'
-							name='studentName'
-							value={data.studentName}
+							id='title'
+							name='title'
+							value={data.title}
 							onChange={onChange}
 						/>
-						{errors.studentName && (
+						{errors.title && (
 							<InlineMessage
-								text={errors.studentName}
+								text={errors.title}
 								messageType={'danger'}
 							/>
 						)}
 					</div>
 					<div className='form-group'>
-						<label htmlFor='age'>
-							<strong>Student Age</strong>
+						<label htmlFor='subject'>
+							<strong>Subject</strong>
 						</label>
 						<input
 							type='text'
 							className='form-control'
-							id='age'
-							name='age'
-							value={data.age}
+							id='subject'
+							name='subject'
+							value={data.subject}
 							onChange={onChange}
 						/>
-						{errors.age && (
+						{errors.subject && (
 							<InlineMessage
-								text={errors.age}
+								text={errors.subject}
 								messageType={'danger'}
 							/>
 						)}
 					</div>
 					<div className='form-group'>
-						<label htmlFor='grade'>
-							<strong>Grade</strong>
+						<label htmlFor='content'>
+							<strong>Content</strong>
 						</label>
 						<input
-							type='grade'
+							type='text'
 							className='form-control'
-							id='grade'
-							name='grade'
-							value={data.grade}
+							id='content'
+							name='content'
+							value={data.content}
 							onChange={onChange}
 						/>
-						{errors.grade && (
+						{errors.content && (
 							<InlineMessage
-								text={errors.grade}
+								text={errors.content}
+								messageType={'danger'}
+							/>
+						)}
+					</div>
+					<div className='form-group'>
+						<label htmlFor='deadline'>
+							<strong>Deadline</strong>
+						</label>
+						<input
+							type='date'
+							className='form-control'
+							id='deadline'
+							name='deadline'
+							value={data.deadline}
+							onChange={onChange}
+						/>
+						{errors.deadline && (
+							<InlineMessage
+								text={errors.deadline}
 								messageType={'danger'}
 							/>
 						)}
@@ -128,4 +149,4 @@ const AddStudent: React.FC<AddStudentProps> = props => {
 	)
 }
 
-export default AddStudent
+export default AddTask

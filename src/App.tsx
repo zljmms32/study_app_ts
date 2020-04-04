@@ -14,11 +14,7 @@ const App: React.FC = () => {
 					<WelcomePage {...props} />
 				)}
 			/>
-			<Route
-				exact
-				path='/dashboard/:studentId'
-				component={DashboardPage}
-			/>
+			<Route path='/dashboard/:studentId' component={DashboardPage} />
 			<UserRoute exact path='/students' component={StudentsPage} />
 		</Router>
 	)

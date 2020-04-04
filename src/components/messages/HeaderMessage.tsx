@@ -7,7 +7,7 @@ type HeaderMessageProps = {
 
 const HeaderMessage: React.FC<HeaderMessageProps> = ({ text }) => {
 	return (
-		<div className='alert alert-danger message' role='alert'>
+		<div className='alert alert-danger' role='alert'>
 			{text}
 		</div>
 	)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouteMatch } from 'react-router-dom'
 
 type TemplateProps = {
 	boardName: string
@@ -9,11 +10,13 @@ const BoardTemplate: React.FC<TemplateProps> = ({
 	boardName,
 	component: Component,
 }) => {
+	const { url } = useRouteMatch()
+
 	return (
-		<div className='mb-2 col-6 d-flex flex-column justify-content-start'>
+		<div className='mb-2 col-lg-6 d-flex flex-column justify-content-start'>
 			<div className='mx-2'>
 				<span className='font-weight-bold'>{boardName}</span>
-				<a href='/seeall' className='text-primary float-right'>
+				<a href={`${url}`} className='text-primary float-right'>
 					See all
 				</a>
 			</div>

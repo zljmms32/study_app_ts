@@ -8,8 +8,15 @@ export const user = {
 }
 
 export const student = {
-	all: (): Promise<StudentInfo[]> =>
-		axios.get('/students').then(res => res.data.students),
+	all: (userId: string): Promise<StudentInfo[]> =>
+		axios.get(`/students?userId=${userId}`).then(res => res.data.students),
 	add: (student: StudentInfo): Promise<StudentInfo> =>
 		axios.post('/students', { student }).then(res => res.data.student),
+}
+
+export const task = {
+	all: (studentId: string): Promise<TaskInfo[]> =>
+		axios.get(`/tasks?studentId=${studentId}`).then(res => res.data.tasks),
+	add: (task: TaskInfo): Promise<TaskInfo> =>
+		axios.post('/tasks', { task }).then(res => res.data.task),
 }

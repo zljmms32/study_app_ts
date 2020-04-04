@@ -9,7 +9,7 @@ type NavProps = {
 const Nav: React.FC<NavProps> = ({ url }) => {
 	const { user, signout } = useContext(Context)
 	return (
-		<div className='col-12 d-flex align-items-center'>
+		<div className='container d-flex align-items-center'>
 			<h1 className='text-lg mb-0 flex-grow-1'>Welcome to Study App</h1>
 			{Object.keys(user).length > 0 ? (
 				<Link

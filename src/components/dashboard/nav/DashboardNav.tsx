@@ -6,7 +6,7 @@ import CurrentStudentCard from './CurrentStudentCard'
 const DashboardNav: React.FC = () => {
 	return (
 		<div
-			className='d-flex align-items-center justify-content-between'
+			className='container-fluid d-flex align-items-center justify-content-between'
 			style={{ height: '10%' }}
 		>
 			<Logo />

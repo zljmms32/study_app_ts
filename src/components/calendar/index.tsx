@@ -46,9 +46,13 @@ const Calendar: React.FC = () => {
 	}
 
 	return (
-		<div className='px-0'>
-			<div className='text-center bg-white d-flex justify-content-between align-items-center'>
-				<button onClick={(): void => handleDateMove(-1)}>
+		<div className='container px-0 mb-2'>
+			<div className='row mx-0 btn-group w-100'>
+				<button
+					onClick={(): void => handleDateMove(-1)}
+					style={{ borderRadius: 0 }}
+					className='btn btn-primary btn-sm'
+				>
 					<i className='fa fa-chevron-left' aria-hidden='true'></i>
 				</button>
 				<button
@@ -65,41 +69,48 @@ const Calendar: React.FC = () => {
 				>
 					{moment(date).format('Y')}
 				</button>
-				<button onClick={(): void => handleDateMove(1)}>
+				<button
+					onClick={(): void => handleDateMove(1)}
+					className='btn btn-primary btn-sm'
+					style={{ borderRadius: 0 }}
+				>
 					<i className='fa fa-chevron-right' aria-hidden='true'></i>
 				</button>
 			</div>
-			{showYearTable && (
-				<table className='table table-sm table-striped text-center'>
-					<Year
-						date={date}
-						setDate={setDate}
-						setShowDayTable={setShowDayTable}
-						setShowMonthTable={setShowMonthTable}
-						setShowYearTable={setShowYearTable}
-					/>
-				</table>
-			)}
-			{showMonthTable && (
-				<table className='table table-sm table-striped text-center'>
-					<Month
-						months={moment.months()}
-						date={date}
-						setDate={setDate}
-						setShowDayTable={setShowDayTable}
-						setShowMonthTable={setShowMonthTable}
-					/>
-				</table>
-			)}
-			{showDayTable && (
-				<table className='table table-sm table-striped text-center'>
-					<thead className='thead-dark'>
-						<tr>{weekdaysShortName}</tr>
-					</thead>
 
-					<Day date={date} />
-				</table>
-			)}
+			<div className='row mx-0 bg-white'>
+				{showYearTable && (
+					<table className='table table-sm container-fluid table-striped text-center w-100 mb-0'>
+						<Year
+							date={date}
+							setDate={setDate}
+							setShowDayTable={setShowDayTable}
+							setShowMonthTable={setShowMonthTable}
+							setShowYearTable={setShowYearTable}
+						/>
+					</table>
+				)}
+				{showMonthTable && (
+					<table className='table table-sm container-fluid table-striped text-center w-100 mb-0'>
+						<Month
+							months={moment.months()}
+							date={date}
+							setDate={setDate}
+							setShowDayTable={setShowDayTable}
+							setShowMonthTable={setShowMonthTable}
+						/>
+					</table>
+				)}
+				{showDayTable && (
+					<table className='table table-sm container-fluid table-striped text-center w-100 mb-0'>
+						<thead className='thead-dark'>
+							<tr>{weekdaysShortName}</tr>
+						</thead>
+
+						<Day date={date} />
+					</table>
+				)}
+			</div>
 		</div>
 	)
 }
