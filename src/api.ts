@@ -15,8 +15,10 @@ export const student = {
 }
 
 export const task = {
-	all: (studentId: string): Promise<TaskInfo[]> =>
-		axios.get(`/tasks?studentId=${studentId}`).then(res => res.data.tasks),
+	all: (taskId: string): Promise<TaskInfo[]> =>
+		axios.get(`/tasks?studentId=${taskId}`).then(res => res.data.tasks),
 	add: (task: TaskInfo): Promise<TaskInfo> =>
 		axios.post('/tasks', { task }).then(res => res.data.task),
+	complete: (task: TaskInfo): Promise<TaskInfo> =>
+		axios.patch('/tasks', { task }).then(res => res.data.task),
 }

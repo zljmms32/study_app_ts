@@ -11,8 +11,8 @@ const BoardMenuList: React.FC = () => {
 			<Link className='px-1 mx-2 btn btn-lg' to={`${url}/task`}>
 				Task
 			</Link>
-			<Link className='px-1 mx-2 btn btn-lg' to={`${url}/test`}>
-				Test
+			<Link className='px-1 mx-2 btn btn-lg' to={`${url}/schedule`}>
+				Schedule
 			</Link>
 			<Link className='px-1 mx-2 btn btn-lg' to={`${url}/report`}>
 				Report
