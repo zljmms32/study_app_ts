@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import Cell from './Cell'
-import { Schedule, Period } from './index'
+import { Period } from './index'
 
 type DayProps = {
 	title: string

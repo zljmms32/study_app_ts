@@ -3,12 +3,7 @@ import moment from 'moment'
 import TimePeriods from './TimePeriods'
 import Day from './Day'
 import ScheduleCell from './ScheduleCell'
-
-export type Schedule = {
-	day: string
-	time: number[]
-	content: string
-}
+import AddItem from './AddItem'
 
 export type Period = {
 	start: number
@@ -23,15 +18,11 @@ const Schedule = () => {
 		end: 24,
 		step: 0.5,
 	})
-	const [schedules] = React.useState<Schedule[]>([
-		{
-			day: 'Monday',
-			time: [6, 8],
-			content: 'complete homework',
-		},
-	])
+	const [schedules] = React.useState<Schedule[]>([])
 
-	const generateCells = (period: Period, schedules: Schedule[]) => {
+	const [showAddItem, setShowAddItem] = React.useState(false)
+
+	const generateCells = (period: Period) => {
 		const titleCells = titles.reduce(
 			(acc, title) => {
 				if (title === 'TimePeriod') {
@@ -52,20 +43,21 @@ const Schedule = () => {
 	}
 
 	const insertSchedules = (period: Period, schedules: Schedule[]) => {
-		const titleCells = generateCells(period, schedules)
+		const titleCells = generateCells(period)
 		for (let i = 0; i < schedules.length; i++) {
-			const { day, content, time } = schedules[i]
+			const { day, content, timeStart, timeEnd } = schedules[i]
 			// schedule day
 			const cells = titleCells[day]
-			const indexOfScheduleTime = time[0] / period.step
-			const cellCount = (time[1] - time[0]) / period.step
+			const indexOfScheduleTime = timeStart / period.step
+			const cellCount = (timeEnd - timeStart) / period.step
 			// remove cells to insert schedule
 			const scheduleCells = new Array(cellCount)
 			scheduleCells[0] = (
 				<ScheduleCell
 					key={`${day}-${indexOfScheduleTime * period.step}`}
 					content={content}
-					time={time}
+					timeStart={timeStart}
+					timeEnd={timeEnd}
 					rowSpan={cellCount}
 				/>
 			)
@@ -92,7 +84,10 @@ const Schedule = () => {
 	return (
 		<>
 			<div className='row'>
-				<button className='btn btn-primary btn-sm'>
+				<button
+					className='btn btn-primary btn-sm'
+					onClick={() => setShowAddItem(true)}
+				>
 					<i className='fa fa-calendar-plus' aria-hidden='true'>
 						Add Item
 					</i>
@@ -112,6 +107,7 @@ const Schedule = () => {
 					<i className='fas fa-cogs'>Settings</i>
 				</button>
 			</div>
+			<AddItem show={showAddItem} onHide={() => setShowAddItem(false)} />
 			<table className='table text-center'>
 				<thead>
 					<tr>
